@@ -6,11 +6,25 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="vue.js"></script>
 </head>
-<body>
-	<h1 id="title">Bienvenido, {{ name }}</h1>
-	<input type="text" id="name">
+<body id="app">
+	<h1>Bienvenido, {{ name }}</h1>
 	
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<input type="text" v-model="name">
+	
+	<hr>
+
+	<pre>{{ $data | json}}</pre>
+
+	<script type="text/javascript">
+		new Vue({
+			el: "#app",
+			data: {
+				name: "Santos"
+			}
+		});
+	</script>
+	
+	<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -18,6 +32,6 @@
 				$('#title').text("Bienvenido " + $('#name').val());
 			});
 		});
-	</script>
+	</script> -->
 </body>
 </html>
