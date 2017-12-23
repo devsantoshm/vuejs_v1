@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ejemplo2</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="vue.js"></script>
+</head>
+<body id="app">
+
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		
+		<template v-if="name">
+			<h1>
+				{{ gender == 'f' ? 'Bienvenida' : 'Bienvenido' }}, {{ name }}
+			</h1>
+			<p>Espero que disfrutes tu visita</p>
+			<p>tu nombre al revés es: {{ name.split('').reverse().join('') }}</p>
+		</template>
+		<p v-else>Por favor escribe tu nombre:</p>
+
+		<input type="text" v-model="name" class="form-control">
+
+		
+		<p v-if="name == ''" class="alert alert-danger">Este campo es obligatorio</p>
+		<p v-if="name.length < 2" class="alert alert-danger">El nombre no es válido</p>
+		
+		<select id="gender" v-model="gender" class="form-control">
+			<option value="">Selecciona un genero</option>
+			<option value="m">Masculino</option>
+			<option value="f">Femenino</option>
+		</select>
+
+		<hr>
+
+		<pre>{{ $data | json}}</pre>	
+	</div>
+</div>
+
+<script type="text/javascript">
+	new Vue({
+		el: "#app",
+		data: {
+			name: "",
+			gender: ""
+		}
+	});
+</script>
+</body>
+</html>
