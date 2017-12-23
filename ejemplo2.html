@@ -35,7 +35,7 @@
 			<hr>
 
 			<p v-show="name">
-				<button type="submit" class="btn btn-primary" v-on:click="signup">
+				<button type="submit" class="btn btn-primary" @click.prevent="signup">
 					Regístrate
 				</button>
 			</p>
@@ -54,7 +54,6 @@
 		},
 		methods: {
 			signup: function(event){
-				event.preventDefault(); //la acción por defecto de un evento no se ejecutará, asimismo evitará la recarga de la página
 				alert('Signing up...');
 			}
 		}
