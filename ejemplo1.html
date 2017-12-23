@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ejemplo1</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="vue.js"></script>
+</head>
+<body>
+	<h1 id="title">Bienvenido, {{ name }}</h1>
+	<input type="text" id="name">
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#name').keyup(function(){
+				$('#title').text("Bienvenido " + $('#name').val());
+			});
+		});
+	</script>
+</body>
+</html>
