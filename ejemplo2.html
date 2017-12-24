@@ -35,8 +35,13 @@
 			<p>¿cuántos años de experiencia tienes con PHP?</p>
 			<p>
 				Respuesta: <strong>{{ years_php }}</strong>
-				<button type="button" class="btn" @click="years_php ++">+</button>
-				<button type="button" class="btn" @click="discount">-</button>
+
+				<button type="button" 
+						:class="{btn: true, 'btn-danger': years_php > 10}"
+						:style="getButtonStyles()"
+						@click="years_php ++">+</button>
+
+				<button type="button" :disabled="years_php == 0" class="btn" @click="discount">-</button>
 			</p>
 
 			<hr>
@@ -76,6 +81,9 @@
 				if (this.years_php > 0) {
 					this.years_php--;
 				}
+			},
+			getButtonStyles: function(){
+				return {'font-size': 10+this.years_php+'px'};
 			}
 		}
 	});
