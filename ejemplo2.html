@@ -20,7 +20,7 @@
 		</template>
 		<p v-else>Por favor escribe tu nombre:</p>
 
-		<form action="">
+		<form @submit.prevent="signup(false, $event)">
 			<input type="text" v-model="name" class="form-control">
 
 			<p v-if="name == ''" class="alert alert-danger">Este campo es obligatorio</p>
@@ -31,12 +31,22 @@
 			<label>
 				Mujer: <input type="radio" v-model="gender" value="f">
 			</label>
+			
+			<p>¿cuántos años de experiencia tienes con PHP?</p>
+			<p>
+				Respuesta: <strong>{{ years_php }}</strong>
+				<button type="button" class="btn" @click="years_php ++">+</button>
+				<button type="button" class="btn" @click="discount">-</button>
+			</p>
 
 			<hr>
 
 			<p v-show="name">
-				<button type="submit" class="btn btn-primary" @click.prevent="signup">
+				<button type="submit" class="btn btn-primary">
 					Regístrate
+				</button>
+				<button type="submit" class="btn btn-primary" @click="signup(true, $event)">
+					Regístrate y sal del sistema
 				</button>
 			</p>
 		</form>
@@ -50,11 +60,22 @@
 		el: "#app",
 		data: {
 			name: "",
-			gender: ""
+			gender: "",
+			years_php: 0
 		},
 		methods: {
-			signup: function(event){
-				alert('Signing up...');
+			signup: function(logout, event){
+				event.preventDefault();
+				alert(this.name + ', espere mientras registramos.');
+
+				if (logout) {
+					alert('Saliendo del sistema');
+				}
+			},
+			discount: function(){
+				if (this.years_php > 0) {
+					this.years_php--;
+				}
 			}
 		}
 	});
