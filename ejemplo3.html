@@ -30,17 +30,8 @@
 				Mujer: <input type="radio" v-model="gender" value="f">
 			</label>
 			
-			<p>¿cuántos años de experiencia tienes con PHP?</p>
-			<p>
-				Respuesta: <strong>{{ years_php }}</strong>
-
-				<button type="button" 
-						:class="{btn: true, 'btn-danger': years_php > 10}"
-						:style="getButtonStyles()"
-						@click="years_php ++">+</button>
-
-				<button type="button" :disabled="years_php == 0" class="btn" @click="discount">-</button>
-			</p>
+			<years-exp :years.sync="years_php" tech="PHP"></years-exp>
+			<years-exp :years.sync="years_js" tech="JS"></years-exp>
 
 			<hr>
 
@@ -64,6 +55,22 @@
 	<h1>{{ gender == 'm' ? 'Bienvenido' : 'Bienvenida' }}, {{ name }}</h1>
 </script>
 
+<script type="text/template" id="years_template">
+	<p>¿cuántos años de experiencia tienes con {{ tech }}?</p>
+	<p>
+		Respuesta: <strong>{{ years }}</strong>
+
+		<button type="button" 
+				:class="{btn: true, 'btn-danger': years > 10}"
+				@click="add">+</button>
+
+		<button type="button" 
+				:disabled="years == 0" 
+				class="btn" 
+				@click="sub">-</button>
+	</p>
+</script>
+
 <script type="text/javascript">
 
 	Vue.component('hello-worl', {
@@ -78,12 +85,28 @@
 		}
 	});
 
+	Vue.component('years-exp', {
+		template: '#years_template',
+		methods: {
+			add: function(){
+				this.years++;
+			},
+			sub: function(){
+				if (this.years > 0) {
+					this.years--;
+				}
+			}
+		},
+		props: ['years', 'tech']
+	});
+
 	new Vue({
 		el: "#app",
 		data: {
 			name: "",
 			gender: "m",
-			years_php: 0
+			years_php: 0,
+			years_js: 0
 		},
 		methods: {
 			signup: function(logout, event){
@@ -92,11 +115,6 @@
 
 				if (logout) {
 					alert('Saliendo del sistema');
-				}
-			},
-			discount: function(){
-				if (this.years_php > 0) {
-					this.years_php--;
 				}
 			},
 			getButtonStyles: function(){
