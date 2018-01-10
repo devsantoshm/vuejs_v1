@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ejemplo1</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="vue.js"></script>
+</head>
+<body>
+	<h1>Hello , Vue</h1>
+	
+	<ul v-for="note in notes">
+		<li>{{ $index + 1 }}: {{ note }}</li>
+	</ul>
+
+	<script type="text/javascript">
+		new Vue({
+			el: "body",
+			data: {
+				notes: [
+					'v-for es la directiva que utilizamos para iterar',
+					'@click se utiliza como un alias de v-on:click ',
+					'con Vue puedes crear tus propios componentes'
+				]
+			}
+		});
+	</script>
+</body>
+</html>
