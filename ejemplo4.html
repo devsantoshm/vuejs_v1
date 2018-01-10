@@ -10,7 +10,7 @@
 	<h1>Hello , Vue</h1>
 	
 	<ul v-for="note in notes">
-		<li>{{ $index + 1 }}: {{ note }}</li>
+		<li>{{ $index + 1 }}: {{ note.text }} por {{ note.author }}</li>
 	</ul>
 
 	<script type="text/javascript">
@@ -18,9 +18,18 @@
 			el: "body",
 			data: {
 				notes: [
-					'v-for es la directiva que utilizamos para iterar',
-					'@click se utiliza como un alias de v-on:click ',
-					'con Vue puedes crear tus propios componentes'
+					{
+						text: 'v-for es la directiva que utilizamos para iterar',
+						author: 'Santos'
+					},
+					{
+						text: '@click se utiliza como un alias de v-on:click ',
+						author: 'Hiuston'
+					},
+					{
+						text: 'con Vue puedes crear tus propios componentes',
+						author: 'fibi'
+					}			
 				]
 			}
 		});
