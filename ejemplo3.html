@@ -30,8 +30,9 @@
 				Mujer: <input type="radio" v-model="gender" value="f">
 			</label>
 			
-			<years-exp :years.sync="years_php" tech="PHP"></years-exp>
-			<years-exp :years.sync="years_js" tech="JS"></years-exp>
+			<template v-for="tech in techs">
+				<years-exp :years.sync="tech.years" :tech="tech.name"></years-exp>
+			</template>
 
 			<hr>
 
@@ -105,8 +106,11 @@
 		data: {
 			name: "",
 			gender: "m",
-			years_php: 0,
-			years_js: 0
+			techs: [
+				{name: 'PHP', years:0},
+				{name: 'HTML', years:0},
+				{name: 'JS', years:0}
+			]
 		},
 		methods: {
 			signup: function(logout, event){

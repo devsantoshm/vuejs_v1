@@ -7,11 +7,18 @@
     <script src="vue.js"></script>
 </head>
 <body>
-	<h1>Hello , Vue</h1>
+	<h1>Hello, Vue!</h1>
 	
 	<ul v-for="note in notes">
 		<li>{{ $index + 1 }}: {{ note.text }} por {{ note.author }}</li>
 	</ul>
+
+	<hr>
+
+	<form @submit.prevent="createNote" class="form">
+		<textarea v-model="new_note.text" class="form-control"></textarea>
+		<button type="submit" class="btn btn-primary">Agregar nota</button>
+	</form>
 
 	<script type="text/javascript">
 		new Vue({
@@ -30,7 +37,14 @@
 						text: 'con Vue puedes crear tus propios componentes',
 						author: 'fibi'
 					}			
-				]
+				],
+				new_note: {text: '', author: 'Santos'}
+			},
+			methods:{
+				createNote: function(){
+					this.notes.push(this.new_note);
+					this.new_note = {text: '', author: 'Santos'};
+				}
 			}
 		});
 	</script>
