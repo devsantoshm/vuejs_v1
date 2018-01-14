@@ -13,15 +13,18 @@
 		
 		<template v-if="name">
 			<h1>
-				{{ gender == 'f' ? 'Bienvenida' : 'Bienvenido' }}, {{ name }}
+				{{ welcome_message }}, {{ name }}
 			</h1>
 			<p>Espero que disfrutes tu visita</p>
-			<p>tu nombre al revés es: {{ name.split('').reverse().join('') }}</p>
+			<p>tu nombre al revés es: {{ reverse_name }}</p>
 		</template>
 		<p v-else>Por favor escribe tu nombre:</p>
 
 		<form @submit.prevent="signup(false, $event)">
-			<input type="text" v-model="name" class="form-control">
+			<label>Primer nombre:</label>
+			<input type="text" v-model="first_name" class="form-control">
+			<label>Apellido:</label>
+			<input type="text" v-model="last_name" class="form-control">
 
 			<p v-if="name == ''" class="alert alert-danger">Este campo es obligatorio</p>
 			
@@ -30,6 +33,10 @@
 			</label>
 			<label>
 				Mujer: <input type="radio" v-model="gender" value="f">
+			</label>
+			<label>
+				¿Hablas español?
+				<input type="checkbox" v-model="spanish">
 			</label>
 			
 			<p>¿cuántos años de experiencia tienes con PHP?</p>
@@ -42,6 +49,7 @@
 						@click="years_php ++">+</button>
 
 				<button type="button" :disabled="years_php == 0" class="btn" @click="discount">-</button>
+				<span>Nivel:</span><strong>{{ level_experience }}</strong>
 			</p>
 
 			<hr>
@@ -64,9 +72,43 @@
 	new Vue({
 		el: "#app",
 		data: {
-			name: "",
+			first_name: "",
+			last_name: "",
 			gender: "",
+			spanish: true,
 			years_php: 0
+		},
+		computed:{
+			welcome_message: function(){
+				
+				if (this.spanish) {
+					return this.gender == 'm' ? 'Bienvenido' : 'Bienvenida';
+				} 
+				return 'welcome';
+			},
+			name: function(){
+				if (this.first_name || this.last_name) {
+					return this.first_name + ' ' + this.last_name;
+				}
+				return '';
+			},
+			reverse_name: function(){
+		        if (this.first_name || this.last_name){
+		        	var full_name = this.first_name +' '+ this.last_name;
+		            return full_name.split('').reverse().join('');
+		        }                 
+		        return '';
+            },
+            level_experience: function(){
+            	if (this.years_php == 0) {
+            		return 'No sabes nada';
+            	}else if(this.years_php <= 2){
+            		return 'Principiante';
+            	}else if(this.years_php <=5){
+            		return 'Intermedio';
+            	}
+            	return 'Experto';
+            }
 		},
 		methods: {
 			signup: function(logout, event){
