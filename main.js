@@ -41,6 +41,10 @@ Vue.component('note-row', {
 var vm = new Vue({
 	el: 'body',
 	data: {
+		new_note: {
+			note: '',
+			category_id: ''
+		},
 		notes: [
 			{
 				note: 'Laravel lts',
@@ -73,6 +77,12 @@ var vm = new Vue({
 				name:'Prublicidad'
 			}
 		]
+	},
+	methods: {
+		createNote: function(){
+			this.notes.push(this.new_note);
+			this.new_note = {note: '', category_id: ''};
+		}
 	},
 	filters: {
 		
