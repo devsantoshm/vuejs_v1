@@ -27,12 +27,7 @@
 				</template>
 				<template v-else>
 					<td>
-						<select v-model="note.category_id" class="form-control">
-							<option value="">Selecciona una categoría</option>
-							<option v-for="category in categories" :value="category.id">
-								{{ category.name }}
-							</option>
-						</select>
+						<select-category :categories="categories" :id.sync="note.category_id"></select-category>
 					</td>
 					<td><input type="text" v-model="note.note" class="form-control"></td>
 					<td><a href="#" @click="updateNote(note)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a></td>
@@ -41,6 +36,18 @@
 		</table>
 	</div>
 </div>
+
+<pre>{{ $data | json }}</pre>
+
+<template id="select_category_tpl">
+	<select v-model="id" class="form-control">
+		<option value="">Selecciona una categoría</option>
+		<option v-for="category in categories" :value="category.id">
+			{{ category.name }}
+		</option>
+	</select>
+</template>
+
 <script src="vue.js"></script>
 <script src="main.js"></script>	
 </body>
